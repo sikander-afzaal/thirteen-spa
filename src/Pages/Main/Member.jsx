@@ -94,7 +94,7 @@ const Member = () => {
         </button>
       </div>
       {/* table start  */}
-      <div className="flex items-start overflow-x-auto justify-start flex-col bg-[#313131] p-5 w-full rounded-2xl mt-8">
+      <div className="flex items-start scollBar overflow-x-auto justify-start flex-col bg-[#313131] p-5 w-full rounded-2xl mt-8">
         {/* search bar  */}
         <div className="h-[40px] px-5 gap-3 w-full max-w-[854px] flex justify-start items-center bg-[#464646] rounded-full">
           <FontAwesomeIcon className="text-[#aeaeae]" icon={faSearch} />

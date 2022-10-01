@@ -38,6 +38,30 @@
 .main svg {
   box-sizing: border-box !important;
 }
+/* width */
+.scrollBar::-webkit-scrollbar,
+.main::-webkit-scrollbar {
+  width: 3px;
+}
+
+/* Track */
+.scrollBar::-webkit-scrollbar-track,
+.main::-webkit-scrollbar-track {
+  background: #313131;
+}
+
+/* Handle */
+.scrollBar::-webkit-scrollbar-thumb,
+.main::-webkit-scrollbar-thumb {
+  background: rgba(72, 72, 72, 0.89);
+}
+
+/* Handle on hover */
+.scrollBar::-webkit-scrollbar-thumb:hover,
+.main::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
 @media screen and (max-width: 1024px) {
   .area {
     grid-template-areas:
