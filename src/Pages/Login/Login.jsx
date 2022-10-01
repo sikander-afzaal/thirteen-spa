@@ -1,3 +1,4 @@
+// React Router Dom ------------------
 import { Link } from "react-router-dom";
 
 const Login = () => {
@@ -12,7 +13,7 @@ const Login = () => {
           className="pl-5 bg-light-gray text-gray-text text-sm rounded-[30px] w-full h-10"
         />
         <input
-          type="text"
+          type="password"
           placeholder="輸入密碼"
           className="pl-5 bg-light-gray text-gray-text text-sm rounded-[30px] w-full h-10"
         />
