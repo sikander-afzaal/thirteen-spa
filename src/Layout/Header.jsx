@@ -11,11 +11,11 @@ const Header = () => {
   const [dropDown, setDropDown] = useState(false);
   return (
     <div className="header gap-6 bg-[#313131] flex pr-8 items-center justify-end h-20 w-full">
-      <div className="lg:flex hidden bg-transparent border-light-gray border-solid border-[1px] rounded-2xl  gap-3 items-center justify-center py-3 px-4">
+      <div className="xl:flex hidden bg-transparent border-light-gray border-solid border-[1px] rounded-2xl  gap-3 items-center justify-center py-3 px-4">
         <p className="text-white text-sm">店家到期日</p>
         <p className="text-gray-text text-lg font-medium">2022/12/31</p>
       </div>
-      <div className="lg:flex hidden bg-transparent border-light-gray border-solid border-[1px] rounded-2xl  gap-3 items-center justify-center py-3 px-4">
+      <div className="xl:flex hidden bg-transparent border-light-gray border-solid border-[1px] rounded-2xl  gap-3 items-center justify-center py-3 px-4">
         <p className="text-white text-sm">剩餘月數</p>
         <p className="text-gray-text text-lg font-medium">100</p>
       </div>
@@ -35,11 +35,11 @@ const Header = () => {
           <p className="pl-5 pb-5 text-white">
             Sarah <br /> <span className="text-[#aeaeae] text-xs">管理員</span>
           </p>
-          <div className="lg:hidden flex bg-transparent w-[95%] mx-auto my-4 flex-col border-light-gray border-solid border-[1px] rounded-2xl  gap-3 items-center justify-center py-3 ">
+          <div className="xl:hidden flex bg-transparent w-[95%] mx-auto my-4 flex-col border-light-gray border-solid border-[1px] rounded-2xl  gap-3 items-center justify-center py-3 ">
             <p className="text-white text-sm">店家到期日</p>
             <p className="text-gray-text text-lg font-medium">2022/12/31</p>
           </div>
-          <div className="lg:hidden flex bg-transparent w-[95%] mx-auto my-4 flex-col border-light-gray border-solid border-[1px] rounded-2xl  gap-3 items-center justify-center py-3 ">
+          <div className="xl:hidden flex bg-transparent w-[95%] mx-auto my-4 flex-col border-light-gray border-solid border-[1px] rounded-2xl  gap-3 items-center justify-center py-3 ">
             <p className="text-white text-sm">剩餘月數</p>
             <p className="text-gray-text text-lg font-medium">100</p>
           </div>

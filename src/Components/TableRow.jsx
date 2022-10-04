@@ -2,7 +2,15 @@
 import { faMessage } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const TableRow = ({ id, img, name, phone, gender, recommender }) => {
+const TableRow = ({
+  openDetails,
+  id,
+  img,
+  name,
+  phone,
+  gender,
+  recommender,
+}) => {
   const tableRowStyle = "border-b-2 py-7 border-solid border-light-gray";
   return (
     <tr>
@@ -25,7 +33,12 @@ const TableRow = ({ id, img, name, phone, gender, recommender }) => {
             className="rounded-full bg-main-pink text-white h-10 w-10 p-3"
             icon={faMessage}
           />
-          <button className="py-3 px-5 rounded-full text-white bg-light-gray">
+          <button
+            onClick={() => {
+              openDetails(true);
+            }}
+            className="py-3 px-5 rounded-full text-white bg-light-gray"
+          >
             詳細
           </button>
         </div>

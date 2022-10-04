@@ -19,33 +19,33 @@ import {
 import { NavLink } from "react-router-dom";
 
 const SideBar = () => {
-  const navLinkStyle = ` text-[#A8ABBD] h-[76px] text-lg w-full pl-5 flex items-center justify-start gap-3 border-l-[3px] border-solid`;
+  const navLinkStyle = `hover:border-main-pink hover:bg-bg-black text-[#A8ABBD] h-[76px] text-xl w-full pl-5 flex items-center justify-start gap-3 border-l-[3px] border-solid`;
   const [openSideBar, setOpenSideBar] = useState(false);
   return (
     <div className="sidebar bg-[#313131] w-full h-full flex item-center justify-start flex-col">
       <div
         onClick={() => setOpenSideBar(false)}
-        className={`lg:hidden z-10 bg-black opacity-60 fixed top-0 left-0 h-screen w-full ${
+        className={`xl:hidden z-10 bg-black opacity-60 fixed top-0 left-0 h-screen w-full ${
           openSideBar ? "block" : "hidden"
         }`}
       ></div>
-      <div className="h-[80px] flex w-full items-center justify-center">
+      <div className="h-[80px] flex w-full items-center justify-start pl-5 xl:justify-center">
         <FontAwesomeIcon
           icon={faBars}
           onClick={() => setOpenSideBar(true)}
-          className="lg:hidden block  text-white text-2xl mr-5 cursor-pointer"
+          className="xl:hidden block  text-white text-2xl mr-5 cursor-pointer"
         />
         <img src="/icon.png" alt="" />
       </div>
       <div
-        className={`lg:static fixed flex items-start justify-start w-full lg:max-w-none max-w-[400px] z-20 ${
+        className={`xl:static fixed flex items-start justify-start w-full xl:max-w-none max-w-[400px] z-20 ${
           openSideBar ? "left-0" : "-left-[600px] "
-        } lg:bg-transparent bg-[#313131] lg:h-auto h-screen top-[0px] flex-col lg:transition-none transition-all`}
+        } xl:bg-transparent bg-[#313131] xl:h-auto h-screen top-[0px] flex-col xl:transition-none transition-all`}
       >
         <FontAwesomeIcon
           icon={faXmark}
           onClick={() => setOpenSideBar(false)}
-          className="lg:hidden block self-end p-5 text-white text-2xl cursor-pointer"
+          className="xl:hidden block self-end p-5 text-white text-2xl cursor-pointer"
         />
         <NavLink
           className={({ isActive }) =>

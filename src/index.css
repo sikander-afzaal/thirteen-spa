@@ -61,8 +61,11 @@
 .main::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
-
-@media screen and (max-width: 1024px) {
+input:checked ~ .dot {
+  transform: translateX(100%);
+  background-color: #ff4e84;
+}
+@media screen and (max-width: 1280px) {
   .area {
     grid-template-areas:
       "sidebar  sidebar header header"
