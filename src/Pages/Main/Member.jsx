@@ -8,14 +8,19 @@ import {
   faSearch,
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-//Components
-import TableRow from "../../Components/TableRow";
 import {
   faCheckCircle,
   faCopy,
   faXmarkCircle,
 } from "@fortawesome/free-regular-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+//Components
+import TableRow from "../../Components/TableRow";
+import AddMember from "../../Components/AddMember";
+import BlackList from "../../Components/Blacklist";
+import ChangePassword from "../../Components/ChangePassword";
+import ConsumptionRow from "../../Components/ConsumptionRow";
+import Record from "../../Components/Record";
 
 const Member = () => {
   const MEMBER_DATA = [
@@ -52,11 +57,53 @@ const Member = () => {
       gender: "Mike(12313)",
     },
   ];
+  const CONSUMPTION_DATA = [
+    {
+      id: "00001",
+      coupen: "有",
+      amount: "5000",
+      appointment: "2022/3/12 12:00-2022/3/12 12:00",
+      order: "2022/3/12 12:00",
+      state: "已完成",
+    },
+    {
+      id: "00001",
+      coupen: "有",
+      amount: "5000",
+      appointment: "2022/3/12 12:00-2022/3/12 12:00",
+      order: "2022/3/12 12:00",
+      state: "已完成",
+    },
+    {
+      id: "00001",
+      coupen: "有",
+      amount: "5000",
+      appointment: "2022/3/12 12:00-2022/3/12 12:00",
+      order: "2022/3/12 12:00",
+      state: "已完成",
+    },
+    {
+      id: "00001",
+      coupen: "有",
+      amount: "5000",
+      appointment: "2022/3/12 12:00-2022/3/12 12:00",
+      order: "2022/3/12 12:00",
+      state: "已完成",
+    },
+  ];
   const tableRowStyle = "border-b-2 py-7 border-solid border-light-gray";
   const [tab, setTab] = useState("所有會員");
+  const [addMember, setAddMember] = useState(false);
   const [memberDetails, setMemberDetails] = useState(false);
+  const [blackList, setBlackList] = useState(false);
+  const [changePassword, setChangePassword] = useState(false);
+  const [record, setRecord] = useState(false);
   return (
     <div className="flex w-full justify-start items-start flex-col ">
+      {addMember && <AddMember closeModal={setAddMember} />}
+      {blackList && <BlackList closeModal={setBlackList} />}
+      {changePassword && <ChangePassword closeModal={setChangePassword} />}
+      {record && <Record closeModal={setRecord} />}
       {/* header  */}
       <div className="flex justify-start items-center gap-5">
         <h1 className="text-white text-2xl sm:text-[33px] font-semibold">
@@ -110,12 +157,16 @@ const Member = () => {
             黑名單
           </p>
         </div>
-        <button className="flex items-center justify-center w-full max-w-[120px] rounded-full bg-main-pink text-white text-lg font-medium h-[50px]">
+        <button
+          onClick={() => setAddMember(true)}
+          className="flex items-center justify-center w-full max-w-[120px] rounded-full bg-main-pink text-white text-lg font-medium h-[50px]"
+        >
           新增會員
         </button>
       </div>
       {/* table start  */}
       {memberDetails ? (
+        //detailed info of the person
         <div className="grid gap-6 lg:gap-0 grid-cols-1 lg:grid-cols-2 flex-col bg-[#313131] py-5 px-5 sm:px-14 w-full rounded-2xl mt-8">
           <div className="flex w-full justify-start border-none lg:border-r-[1px] lg:pr-9 lg:border-solid border-light-gray items-center lg:items-start flex-col">
             <h2 className="mb-4 text-white text-[28px] font-normal">頭像</h2>
@@ -213,7 +264,12 @@ const Member = () => {
             </div>
             <div className="flex justify-between items-center w-full  border-b-[1px] border-light-gray pb-3">
               <p className="text-base text-gray-text">修改密碼</p>
-              <button className="text-white text-xs sm:text-xs rounded-full bg-main-pink border-none w-[65px] h-[35px] cursor-pointerso">
+              <button
+                onClick={() => {
+                  setChangePassword(true);
+                }}
+                className="text-white text-xs sm:text-xs rounded-full bg-main-pink border-none w-[65px] h-[35px] cursor-pointerso"
+              >
                 修改密碼
               </button>
             </div>
@@ -276,7 +332,13 @@ const Member = () => {
               <p className="text-gray-text text-xs pl-5">2022/04/21 13:00</p>
             </div>
             <div className="flex sm:flex-row flex-col gap-4 items-center w-full justify-start mt-10">
-              <button className="text-[#898989] text-lg bg-white rounded-full h-12 w-full sm:w-[200px]">
+              <button
+                onClick={() => {
+                  setBlackList(true);
+                  setMemberDetails(false);
+                }}
+                className="text-[#898989] text-lg bg-white rounded-full h-12 w-full sm:w-[200px]"
+              >
                 加入黑名單
               </button>
               <button className="text-white text-lg bg-main-pink rounded-full h-12 w-full sm:w-[200px]">
@@ -285,7 +347,8 @@ const Member = () => {
             </div>
           </div>
         </div>
-      ) : (
+      ) : //if first tab is selected then this shows otherwise the other table is showed
+      tab === "所有會員" ? (
         <div className="flex items-start scollBar overflow-x-auto justify-start flex-col bg-[#313131] p-5 w-full rounded-2xl mt-8">
           {/* search bar  */}
           <div className="h-[40px] px-5 gap-3 w-full max-w-[854px] flex justify-start items-center bg-[#464646] rounded-full">
@@ -316,6 +379,81 @@ const Member = () => {
               {MEMBER_DATA.map((elem, idx) => {
                 return (
                   <TableRow
+                    openDetails={setMemberDetails}
+                    {...elem}
+                    key={"member" + idx}
+                  />
+                );
+              })}
+            </tbody>
+          </table>
+          <div className="flex gap-3 mt-20 justify-start items-center self-end">
+            <p className="text-[#a8abbd] text-sm">目前頁面：</p>
+            <p className="sm:hidden text-white block">1</p>
+            <select className="sm:block hidden cursor-pointer bg-transparent border-none text-white focus:outline-none">
+              <option className="bg-light-gray" value="1">
+                1
+              </option>
+              <option className="bg-light-gray" value="1">
+                2
+              </option>
+              <option className="bg-light-gray" value="1">
+                3
+              </option>
+              <option className="bg-light-gray" value="1">
+                4
+              </option>
+            </select>
+            <p className="sm:block hidden text-[#a8abbd] text-sm">
+              總計30000筆資料，共200頁
+            </p>
+            <FontAwesomeIcon
+              className="text-[#a8abbd]  text-sm"
+              icon={faChevronLeft}
+            />
+            <FontAwesomeIcon
+              icon={faChevronRight}
+              className="text-[#a8abbd] text-sm"
+            />
+          </div>
+        </div>
+      ) : (
+        <div className="flex items-start scollBar overflow-x-auto justify-start flex-col bg-[#313131] p-5 w-full rounded-2xl mt-8">
+          {/* search bar  */}
+          <div className="w-full sm:flex-row flex-col flex items-center justify-start gap-3">
+            <div className="h-[40px] px-5 gap-3 w-full flex justify-start items-center bg-[#464646] rounded-full">
+              <FontAwesomeIcon className="text-[#aeaeae]" icon={faSearch} />
+              <input
+                type="text"
+                placeholder="搜尋用戶"
+                className="w-full text-[#aeaeae] text-base h-full border-none bg-transparent focus:outline-none"
+              />
+            </div>
+            <button
+              onClick={() => setRecord(true)}
+              className="text-white sm:max-w-[142px] text-lg bg-main-pink rounded-full h-10 w-full "
+            >
+              消費技師
+            </button>
+          </div>
+
+          {/* table  */}
+          <table className="table-auto  border-collapse w-[1000px] lg:w-full mt-10 text-white text-left">
+            <thead>
+              <tr>
+                <th className={`${tableRowStyle}`}>訂單編號</th>
+                <th className={`${tableRowStyle}`}>優惠券有無</th>
+                <th className={`${tableRowStyle}`}>金額</th>
+                <th className={`${tableRowStyle}`}>預約時間</th>
+                <th className={`${tableRowStyle}`}>訂單成立</th>
+                <th className={`${tableRowStyle}`}>狀態</th>
+                <th className={`${tableRowStyle}`}></th>
+              </tr>
+            </thead>
+            <tbody>
+              {CONSUMPTION_DATA.map((elem, idx) => {
+                return (
+                  <ConsumptionRow
                     openDetails={setMemberDetails}
                     {...elem}
                     key={"member" + idx}
