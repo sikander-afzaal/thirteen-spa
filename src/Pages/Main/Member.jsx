@@ -111,7 +111,7 @@ const Member = () => {
             <p>
               <FontAwesomeIcon
                 icon={faChevronLeft}
-                className="text-white text-2xl mr-5"
+                className="text-white text-2xl mr-5 cursor-pointer"
                 onClick={() => setMemberDetails(false)}
               />
               會員資料 - 王（81076）
@@ -180,7 +180,7 @@ const Member = () => {
               />
               <div className="flex items-center justify-center">
                 <label
-                  for="toggleB"
+                  htmlFor="toggleB"
                   className="flex items-center cursor-pointer"
                 >
                   <div className="relative">

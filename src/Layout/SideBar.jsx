@@ -48,28 +48,31 @@ const SideBar = () => {
           className="xl:hidden block self-end p-5 text-white text-2xl cursor-pointer"
         />
         <NavLink
+          onClick={() => setOpenSideBar(false)}
           className={({ isActive }) =>
             isActive
               ? `border-main-pink bg-bg-black ${navLinkStyle}`
               : `${navLinkStyle} border-transparent`
           }
-          to={"/home"}
+          to={"/home/"}
         >
           <FontAwesomeIcon className="w-6 h-6" icon={faUser} />
           會員管理
         </NavLink>
         <NavLink
+          onClick={() => setOpenSideBar(false)}
           className={({ isActive }) =>
             isActive
               ? `border-main-pink bg-bg-black ${navLinkStyle}`
               : `${navLinkStyle} border-transparent`
           }
-          to={"/home/technician"}
+          to={"/home/technician-manage"}
         >
           <img className="w-6 h-6" src="/user-girl.svg" />
           技師管理
         </NavLink>
         <NavLink
+          onClick={() => setOpenSideBar(false)}
           className={({ isActive }) =>
             isActive
               ? `border-main-pink bg-bg-black ${navLinkStyle}`
@@ -81,6 +84,7 @@ const SideBar = () => {
           客製化項目
         </NavLink>
         <NavLink
+          onClick={() => setOpenSideBar(false)}
           className={({ isActive }) =>
             isActive
               ? `border-main-pink bg-bg-black ${navLinkStyle}`
@@ -92,6 +96,7 @@ const SideBar = () => {
           訂單管理
         </NavLink>
         <NavLink
+          onClick={() => setOpenSideBar(false)}
           className={({ isActive }) =>
             isActive
               ? `border-main-pink bg-bg-black ${navLinkStyle}`
@@ -103,6 +108,7 @@ const SideBar = () => {
           班表管理
         </NavLink>
         <NavLink
+          onClick={() => setOpenSideBar(false)}
           className={({ isActive }) =>
             isActive
               ? `border-main-pink bg-bg-black ${navLinkStyle}`
@@ -114,6 +120,7 @@ const SideBar = () => {
           技師狀態管理
         </NavLink>
         <NavLink
+          onClick={() => setOpenSideBar(false)}
           className={({ isActive }) =>
             isActive
               ? `border-main-pink bg-bg-black ${navLinkStyle}`
@@ -125,6 +132,7 @@ const SideBar = () => {
           聊天室管理
         </NavLink>
         <NavLink
+          onClick={() => setOpenSideBar(false)}
           className={({ isActive }) =>
             isActive
               ? `border-main-pink bg-bg-black ${navLinkStyle}`
@@ -136,6 +144,7 @@ const SideBar = () => {
           技師聊天室
         </NavLink>
         <NavLink
+          onClick={() => setOpenSideBar(false)}
           className={({ isActive }) =>
             isActive
               ? `border-main-pink bg-bg-black ${navLinkStyle}`
@@ -147,6 +156,7 @@ const SideBar = () => {
           店家聊天室
         </NavLink>
         <NavLink
+          onClick={() => setOpenSideBar(false)}
           className={({ isActive }) =>
             isActive
               ? `border-main-pink bg-bg-black ${navLinkStyle}`

@@ -63,6 +63,9 @@
 }
 input:checked ~ .dot {
   transform: translateX(100%);
+  background-color: white;
+}
+input:checked ~ .bg-toggle {
   background-color: #ff4e84;
 }
 @media screen and (max-width: 1280px) {
