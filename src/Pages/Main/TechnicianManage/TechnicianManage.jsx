@@ -8,13 +8,24 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+//React Router Dom ------------------------------
+import { useLocation, Outlet, Link, NavLink } from "react-router-dom";
 //Components
 import TableRow from "../../../Components/TableRow";
 import ConsumptionRow from "../../../Components/ConsumptionRow";
-import TechnicianDetails from "./TechnicianDetails";
 import ToggleBtn from "../../../Components/ToggleBtn";
 
+//navlink component --------------------------------
+// const NavlinkComp = (path, name) => {
+//
+//   return (
+
+//   );
+// };
+
 const TechnicianManage = () => {
+  const NAVLINK__STYLES =
+    "cursor-pointer text-center w-[60px] sm:w-[90px] pb-5 border-b-2  border-solid text-xs sm:text-sm";
   const MEMBER_DATA = [
     {
       id: "00001",
@@ -86,6 +97,7 @@ const TechnicianManage = () => {
   const tableRowStyle = "border-b-2 py-7 border-solid border-light-gray";
   const [tab, setTab] = useState("所有會員");
   const [memberDetails, setMemberDetails] = useState(false);
+  const location = useLocation();
   useEffect(() => {
     if (memberDetails) {
       setTab("基本資訊");
@@ -99,9 +111,9 @@ const TechnicianManage = () => {
       {/* header  */}
       <div className="flex justify-start items-center gap-5 w-full">
         <h1 className="text-white text-2xl sm:text-[33px] font-semibold w-full">
-          {memberDetails ? (
+          {location.pathname !== "/home/technician-manage" ? (
             <div className="flex justify-between items-start sm:items-center w-full sm:flex-row flex-col gap-5">
-              <p>
+              <Link to={"/home/technician-manage"}>
                 <FontAwesomeIcon
                   icon={faChevronLeft}
                   className="text-white text-2xl mr-5 cursor-pointer"
@@ -110,7 +122,7 @@ const TechnicianManage = () => {
                   }}
                 />
                 技師資料 - Anna（81076）
-              </p>
+              </Link>
               <div className="h-12 self-end sm:self-auto px-4 flex justify-center  items-center gap-3 rounded-2xl bg-[#313131]">
                 <p className="text-white text-sm">已上架</p>
                 <ToggleBtn />
@@ -123,34 +135,35 @@ const TechnicianManage = () => {
       </div>
       {/* tabs + button  */}
       <div className="mt-[35px] flex justify-between items-start w-full overflow-x-auto">
-        {memberDetails ? (
+        {location.pathname !== "/home/technician-manage" ? (
           //when viewing member details this page is nav is shown else the other one
 
           <div className="flex justify-start items-center gap-1 ">
-            <p
-              onClick={(e) => {
-                setTab(e.target.innerText);
-              }}
-              className={`cursor-pointer text-center w-[60px] sm:w-[90px] pb-5 border-b-2  border-solid text-xs sm:text-sm  ${
-                tab === "基本資訊"
-                  ? "text-white border-main-pink"
-                  : "border-[#898989] text-[#898989]"
-              }`}
+            <NavLink
+              to={`/home/technician-manage/details`}
+              className={({ isActive }) =>
+                ` ${NAVLINK__STYLES}  ${
+                  isActive
+                    ? "text-white border-main-pink"
+                    : "border-[#898989] text-[#898989]"
+                }`
+              }
             >
               基本資訊
-            </p>
-            <p
-              onClick={(e) => {
-                setTab(e.target.innerText);
-              }}
-              className={`cursor-pointer text-center w-[60px] sm:w-[90px] pb-5 border-b-2  border-solid text-xs sm:text-sm  ${
-                tab === "技師資訊"
-                  ? "text-white border-main-pink"
-                  : "border-[#898989] text-[#898989]"
-              }`}
+            </NavLink>
+            <NavLink
+              to={`/home/technician-manage/info`}
+              className={({ isActive }) =>
+                ` ${NAVLINK__STYLES}  ${
+                  isActive
+                    ? "text-white border-main-pink"
+                    : "border-[#898989] text-[#898989]"
+                }`
+              }
             >
               技師資訊
-            </p>
+            </NavLink>
+
             <p
               onClick={(e) => {
                 setTab(e.target.innerText);
@@ -295,84 +308,11 @@ const TechnicianManage = () => {
         )}
       </div>
       {/* table start  */}
-      {memberDetails ? (
-        //detailed info of the person
-        <TechnicianDetails />
-      ) : //if first tab is selected then this shows otherwise the other table is showed
-      tab === "所有會員" ? (
-        <div className="flex items-start scollBar overflow-x-auto justify-start flex-col bg-[#313131] p-5 w-full rounded-2xl mt-8">
-          {/* search bar  */}
-          <div className="h-[40px] px-5 gap-3 w-full max-w-[854px] flex justify-start items-center bg-[#464646] rounded-full">
-            <FontAwesomeIcon className="text-[#aeaeae]" icon={faSearch} />
-            <input
-              type="text"
-              placeholder="搜尋用戶"
-              className="w-full text-[#aeaeae] text-base h-full border-none bg-transparent focus:outline-none"
-            />
-          </div>
-          {/* table  */}
-          <table className="table-auto  border-collapse w-[1000px] lg:w-full mt-10 text-white text-left">
-            <thead>
-              <tr>
-                <th className={`${tableRowStyle}`}>
-                  <input type="checkbox" disabled />
-                </th>
-                <th className={`${tableRowStyle}`}>會員編號</th>
-                <th className={`${tableRowStyle}`}>用戶名</th>
-                <th className={`${tableRowStyle}`}>行動電話</th>
-                <th className={`${tableRowStyle}`}>性別</th>
-                <th className={`${tableRowStyle}`}>推薦人</th>
-                <th className={`${tableRowStyle}`}></th>
-                <th className={`${tableRowStyle}`}></th>
-              </tr>
-            </thead>
-            <tbody>
-              {MEMBER_DATA.map((elem, idx) => {
-                return (
-                  <TableRow
-                    openDetails={setMemberDetails}
-                    {...elem}
-                    key={"member" + idx}
-                  />
-                );
-              })}
-            </tbody>
-          </table>
-          <div className="flex gap-3 mt-20 justify-start items-center self-end">
-            <p className="text-[#a8abbd] text-sm">目前頁面：</p>
-            <p className="sm:hidden text-white block">1</p>
-            <select className="sm:block hidden cursor-pointer bg-transparent border-none text-white focus:outline-none">
-              <option className="bg-light-gray" value="1">
-                1
-              </option>
-              <option className="bg-light-gray" value="1">
-                2
-              </option>
-              <option className="bg-light-gray" value="1">
-                3
-              </option>
-              <option className="bg-light-gray" value="1">
-                4
-              </option>
-            </select>
-            <p className="sm:block hidden text-[#a8abbd] text-sm">
-              總計30000筆資料，共200頁
-            </p>
-            <FontAwesomeIcon
-              className="text-[#a8abbd]  text-sm"
-              icon={faChevronLeft}
-            />
-            <FontAwesomeIcon
-              icon={faChevronRight}
-              className="text-[#a8abbd] text-sm"
-            />
-          </div>
-        </div>
-      ) : (
-        <div className="flex items-start scollBar overflow-x-auto justify-start flex-col bg-[#313131] p-5 w-full rounded-2xl mt-8">
-          {/* search bar  */}
-          <div className="w-full sm:flex-row flex-col flex items-center justify-start gap-3">
-            <div className="h-[40px] px-5 gap-3 w-full flex justify-start items-center bg-[#464646] rounded-full">
+      {location.pathname === "/home/technician-manage" ? (
+        tab === "所有會員" ? (
+          <div className="flex items-start scollBar overflow-x-auto justify-start flex-col bg-[#313131] p-5 w-full rounded-2xl mt-8">
+            {/* search bar  */}
+            <div className="h-[40px] px-5 gap-3 w-full max-w-[854px] flex justify-start items-center bg-[#464646] rounded-full">
               <FontAwesomeIcon className="text-[#aeaeae]" icon={faSearch} />
               <input
                 type="text"
@@ -380,66 +320,139 @@ const TechnicianManage = () => {
                 className="w-full text-[#aeaeae] text-base h-full border-none bg-transparent focus:outline-none"
               />
             </div>
-            <button className="text-white sm:max-w-[142px] text-lg bg-main-pink rounded-full h-10 w-full ">
-              消費技師
-            </button>
+            {/* table  */}
+            <table className="table-auto  border-collapse w-[1000px] lg:w-full mt-10 text-white text-left">
+              <thead>
+                <tr>
+                  <th className={`${tableRowStyle}`}>
+                    <input type="checkbox" disabled />
+                  </th>
+                  <th className={`${tableRowStyle}`}>會員編號</th>
+                  <th className={`${tableRowStyle}`}>用戶名</th>
+                  <th className={`${tableRowStyle}`}>行動電話</th>
+                  <th className={`${tableRowStyle}`}>性別</th>
+                  <th className={`${tableRowStyle}`}>推薦人</th>
+                  <th className={`${tableRowStyle}`}></th>
+                  <th className={`${tableRowStyle}`}></th>
+                </tr>
+              </thead>
+              <tbody>
+                {MEMBER_DATA.map((elem, idx) => {
+                  return (
+                    <TableRow
+                      openDetails={setMemberDetails}
+                      {...elem}
+                      key={"member" + idx}
+                    />
+                  );
+                })}
+              </tbody>
+            </table>
+            <div className="flex gap-3 mt-20 justify-start items-center self-end">
+              <p className="text-[#a8abbd] text-sm">目前頁面：</p>
+              <p className="sm:hidden text-white block">1</p>
+              <select className="sm:block hidden cursor-pointer bg-transparent border-none text-white focus:outline-none">
+                <option className="bg-light-gray" value="1">
+                  1
+                </option>
+                <option className="bg-light-gray" value="1">
+                  2
+                </option>
+                <option className="bg-light-gray" value="1">
+                  3
+                </option>
+                <option className="bg-light-gray" value="1">
+                  4
+                </option>
+              </select>
+              <p className="sm:block hidden text-[#a8abbd] text-sm">
+                總計30000筆資料，共200頁
+              </p>
+              <FontAwesomeIcon
+                className="text-[#a8abbd]  text-sm"
+                icon={faChevronLeft}
+              />
+              <FontAwesomeIcon
+                icon={faChevronRight}
+                className="text-[#a8abbd] text-sm"
+              />
+            </div>
           </div>
+        ) : (
+          <div className="flex items-start scollBar overflow-x-auto justify-start flex-col bg-[#313131] p-5 w-full rounded-2xl mt-8">
+            {/* search bar  */}
+            <div className="w-full sm:flex-row flex-col flex items-center justify-start gap-3">
+              <div className="h-[40px] px-5 gap-3 w-full flex justify-start items-center bg-[#464646] rounded-full">
+                <FontAwesomeIcon className="text-[#aeaeae]" icon={faSearch} />
+                <input
+                  type="text"
+                  placeholder="搜尋用戶"
+                  className="w-full text-[#aeaeae] text-base h-full border-none bg-transparent focus:outline-none"
+                />
+              </div>
+              <button className="text-white sm:max-w-[142px] text-lg bg-main-pink rounded-full h-10 w-full ">
+                消費技師
+              </button>
+            </div>
 
-          {/* table  */}
-          <table className="table-auto  border-collapse w-[1000px] lg:w-full mt-10 text-white text-left">
-            <thead>
-              <tr>
-                <th className={`${tableRowStyle}`}>訂單編號</th>
-                <th className={`${tableRowStyle}`}>優惠券有無</th>
-                <th className={`${tableRowStyle}`}>金額</th>
-                <th className={`${tableRowStyle}`}>預約時間</th>
-                <th className={`${tableRowStyle}`}>訂單成立</th>
-                <th className={`${tableRowStyle}`}>狀態</th>
-                <th className={`${tableRowStyle}`}></th>
-              </tr>
-            </thead>
-            <tbody>
-              {CONSUMPTION_DATA.map((elem, idx) => {
-                return (
-                  <ConsumptionRow
-                    openDetails={setMemberDetails}
-                    {...elem}
-                    key={"member" + idx}
-                  />
-                );
-              })}
-            </tbody>
-          </table>
-          <div className="flex gap-3 mt-20 justify-start items-center self-end">
-            <p className="text-[#a8abbd] text-sm">目前頁面：</p>
-            <p className="sm:hidden text-white block">1</p>
-            <select className="sm:block hidden cursor-pointer bg-transparent border-none text-white focus:outline-none">
-              <option className="bg-light-gray" value="1">
-                1
-              </option>
-              <option className="bg-light-gray" value="1">
-                2
-              </option>
-              <option className="bg-light-gray" value="1">
-                3
-              </option>
-              <option className="bg-light-gray" value="1">
-                4
-              </option>
-            </select>
-            <p className="sm:block hidden text-[#a8abbd] text-sm">
-              總計30000筆資料，共200頁
-            </p>
-            <FontAwesomeIcon
-              className="text-[#a8abbd]  text-sm"
-              icon={faChevronLeft}
-            />
-            <FontAwesomeIcon
-              icon={faChevronRight}
-              className="text-[#a8abbd] text-sm"
-            />
+            {/* table  */}
+            <table className="table-auto  border-collapse w-[1000px] lg:w-full mt-10 text-white text-left">
+              <thead>
+                <tr>
+                  <th className={`${tableRowStyle}`}>訂單編號</th>
+                  <th className={`${tableRowStyle}`}>優惠券有無</th>
+                  <th className={`${tableRowStyle}`}>金額</th>
+                  <th className={`${tableRowStyle}`}>預約時間</th>
+                  <th className={`${tableRowStyle}`}>訂單成立</th>
+                  <th className={`${tableRowStyle}`}>狀態</th>
+                  <th className={`${tableRowStyle}`}></th>
+                </tr>
+              </thead>
+              <tbody>
+                {CONSUMPTION_DATA.map((elem, idx) => {
+                  return (
+                    <ConsumptionRow
+                      openDetails={setMemberDetails}
+                      {...elem}
+                      key={"member" + idx}
+                    />
+                  );
+                })}
+              </tbody>
+            </table>
+            <div className="flex gap-3 mt-20 justify-start items-center self-end">
+              <p className="text-[#a8abbd] text-sm">目前頁面：</p>
+              <p className="sm:hidden text-white block">1</p>
+              <select className="sm:block hidden cursor-pointer bg-transparent border-none text-white focus:outline-none">
+                <option className="bg-light-gray" value="1">
+                  1
+                </option>
+                <option className="bg-light-gray" value="1">
+                  2
+                </option>
+                <option className="bg-light-gray" value="1">
+                  3
+                </option>
+                <option className="bg-light-gray" value="1">
+                  4
+                </option>
+              </select>
+              <p className="sm:block hidden text-[#a8abbd] text-sm">
+                總計30000筆資料，共200頁
+              </p>
+              <FontAwesomeIcon
+                className="text-[#a8abbd]  text-sm"
+                icon={faChevronLeft}
+              />
+              <FontAwesomeIcon
+                icon={faChevronRight}
+                className="text-[#a8abbd] text-sm"
+              />
+            </div>
           </div>
-        </div>
+        )
+      ) : (
+        <Outlet />
       )}
     </div>
   );

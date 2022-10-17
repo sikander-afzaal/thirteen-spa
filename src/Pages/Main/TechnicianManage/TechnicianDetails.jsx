@@ -1,3 +1,4 @@
+import { useState } from "react";
 //ICON LIBRARY------------------
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -12,6 +13,7 @@ import CtaBtn from "../../../Components/CtaBtn";
 import ToggleBtn from "../../../Components/ToggleBtn";
 
 const TechnicianDetails = () => {
+  const [password, setPassword] = useState(false);
   return (
     <div className="grid gap-6 lg:gap-0 grid-cols-1 lg:grid-cols-2 flex-col bg-[#313131] py-5 px-5 sm:px-14 w-full rounded-2xl mt-8">
       <div className="flex w-full justify-start border-none lg:border-r-[1px] lg:pr-9 lg:border-solid border-light-gray items-center lg:items-start flex-col">
@@ -179,7 +181,10 @@ const TechnicianDetails = () => {
 
         <div className="flex justify-between items-center w-full  border-b-[1px] border-light-gray pb-3">
           <p className="text-base text-gray-text">密碼</p>
-          <button className="text-white text-xs sm:text-xs rounded-full bg-main-pink border-none w-[65px] h-[35px] cursor-pointerso">
+          <button
+            onClick={() => setPassword(true)}
+            className="text-white text-xs sm:text-xs rounded-full bg-main-pink border-none w-[65px] h-[35px] cursor-pointerso"
+          >
             修改密碼
           </button>
         </div>
