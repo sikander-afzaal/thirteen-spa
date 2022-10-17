@@ -22,7 +22,7 @@ const SideBar = () => {
   const navLinkStyle = `hover:border-main-pink hover:bg-bg-black text-[#A8ABBD] h-[76px] text-xl w-full pl-5 flex items-center justify-start gap-3 border-l-[3px] border-solid`;
   const [openSideBar, setOpenSideBar] = useState(false);
   return (
-    <div className="sidebar bg-[#313131] w-full min-w-[200px] h-full flex item-center justify-start flex-col">
+    <div className="sidebar bg-[#313131]  min-w-[300px] h-full flex item-center justify-start flex-col">
       <div
         onClick={() => setOpenSideBar(false)}
         className={`xl:hidden z-10 bg-black opacity-60 fixed top-0 left-0 h-screen w-full ${
