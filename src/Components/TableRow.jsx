@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 //ICON LIBRARY ----------------------------------
 import { faMessage } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -33,14 +34,23 @@ const TableRow = ({
             className="rounded-full bg-main-pink text-white h-10 w-10 p-3"
             icon={faMessage}
           />
-          <button
-            onClick={() => {
-              openDetails(true);
-            }}
-            className="py-3 px-5 rounded-full text-white bg-light-gray"
-          >
-            詳細
-          </button>
+          {openDetails ? (
+            <button
+              onClick={() => {
+                openDetails(true);
+              }}
+              className="py-3 px-5 rounded-full text-white bg-light-gray"
+            >
+              詳細
+            </button>
+          ) : (
+            <Link
+              to="/home/technician-manage/details"
+              className="py-3 px-5 rounded-full text-white bg-light-gray"
+            >
+              詳細
+            </Link>
+          )}
         </div>
       </td>
     </tr>

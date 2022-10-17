@@ -163,19 +163,19 @@ const TechnicianManage = () => {
             >
               技師資訊
             </NavLink>
-
-            <p
-              onClick={(e) => {
-                setTab(e.target.innerText);
-              }}
-              className={`cursor-pointer text-center w-[60px] sm:w-[90px] pb-5 border-b-2  border-solid text-xs sm:text-sm  ${
-                tab === "技師設定"
-                  ? "text-white border-main-pink"
-                  : "border-[#898989] text-[#898989]"
-              }`}
+            <NavLink
+              to={`/home/technician-manage/setting`}
+              className={({ isActive }) =>
+                ` ${NAVLINK__STYLES}  ${
+                  isActive
+                    ? "text-white border-main-pink"
+                    : "border-[#898989] text-[#898989]"
+                }`
+              }
             >
               技師設定
-            </p>
+            </NavLink>
+
             <p
               onClick={(e) => {
                 setTab(e.target.innerText);
@@ -338,13 +338,7 @@ const TechnicianManage = () => {
               </thead>
               <tbody>
                 {MEMBER_DATA.map((elem, idx) => {
-                  return (
-                    <TableRow
-                      openDetails={setMemberDetails}
-                      {...elem}
-                      key={"member" + idx}
-                    />
-                  );
+                  return <TableRow {...elem} key={"member" + idx} />;
                 })}
               </tbody>
             </table>
@@ -410,13 +404,7 @@ const TechnicianManage = () => {
               </thead>
               <tbody>
                 {CONSUMPTION_DATA.map((elem, idx) => {
-                  return (
-                    <ConsumptionRow
-                      openDetails={setMemberDetails}
-                      {...elem}
-                      key={"member" + idx}
-                    />
-                  );
+                  return <ConsumptionRow {...elem} key={"member" + idx} />;
                 })}
               </tbody>
             </table>
